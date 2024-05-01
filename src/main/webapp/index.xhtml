@@ -1,33 +1,21 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <title>PrimeFaces Example</title>
-</h:head>
-<h:body>
-    <h:form>
-        <h:panelGrid columns="2" cellpadding="5" style="margin-left: 20px">
-            <h:outputText value="Inline: " />
-            <p:colorPicker value="#{colorView.colorInline}" mode="inline" />
-
-            <h:outputText value="Popup: " />
-            <p:colorPicker value="#{colorView.colorPopup}" />
-        </h:panelGrid>
-
-        <p:separator />
-
-        <p:commandButton value="Submit" oncomplete="PF('dlg').show();" update="grid" style="margin-left: 20px" />
-
-        <p:dialog modal="true" widgetVar="dlg" showEffect="fade" hideEffect="fade" header="Selected Colors" resizable="false">
-            <h:panelGrid id="grid" columns="2" cellpadding="5">
-                <h:outputText value="Inline color: " />
-                <h:outputText value="#{colorView.colorInline}" style="background-color: ##{colorView.colorInline}" />
-
-                <h:outputText value="Popup color: " />
-                <h:outputText value="#{colorView.colorPopup}" style="background-color: ##{colorView.colorPopup}" />
-            </h:panelGrid>
-        </p:dialog>
-    </h:form>
-</h:body>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
+<f:view>
+    <head>
+        <title>Ma Page JSF</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+    <ui:include src="header.xhtml" />
+    <ui:include src="menu.xhtml" />
+    <ui:insert name="content" />
+    <ui:include src="footer.xhtml" />
+    </body>
+</f:view>
 </html>

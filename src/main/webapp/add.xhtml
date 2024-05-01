@@ -1,0 +1,23 @@
+<ui:composition template="index.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+   <ui:define name="content">
+      <h1>Ajouter un nouvel élément</h1>
+      <h:form>
+         <p:panelGrid columns="2">
+            <h:outputLabel for="name" value="Nom" />
+            <p:inputText id="name" value="#{myBean.newElement.name}" />
+
+            <h:outputLabel for="date" value="Date" />
+            <p:calendar id="date" value="#{myBean.newElement.date}" />
+
+            <h:outputLabel for="description" value="Description" />
+            <p:inputTextarea id="description" value="#{myBean.newElement.description}" />
+         </p:panelGrid>
+
+         <p:commandButton value="Ajouter" action="#{myBean.addElement}" />
+      </h:form>
+   </ui:define>
+</ui:composition>
+
