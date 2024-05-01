@@ -1,12 +1,13 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:p="http://primefaces.org/ui">
 
-    <h:panelGroup>
-        <h:link value="Accueil" outcome="/index" />
-        <h:link value="Ajouter un élément" outcome="/add" />
-        <h:link value="Recherche" outcome="/search" />
-    </h:panelGroup>
-
+    <div class="sidemenue">
+        <h:panelGroup>
+            <h:link value="Accueil" styleClass="alink"  outcome="/index" style="margin-right: 20px; padding: 5px" />
+            <h:link value="Ajouter un élément" styleClass="alink"  outcome="/add" style="margin-right: 20px; padding: 5px" />
+            <h:link value="Recherche" styleClass="alink" outcome="/search" style="padding: 5px"/>
+        </h:panelGroup>
+    </div>
 </ui:composition>

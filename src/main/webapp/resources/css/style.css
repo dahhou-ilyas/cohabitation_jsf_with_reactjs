@@ -1,0 +1,94 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.custom-toolbar {
+    background-color: #9c9c9c;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.header-title {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.header-count {
+    font-size: 1em;
+    color: #252525;
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+p:panelGrid {
+    margin: 10px 0;
+}
+
+p:commandButton {
+    margin-top: 20px;
+}
+
+p:dataTable {
+    border: 1px solid #dee2e6;
+}
+
+p:dataTable .ui-widget-header {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+footer {
+    background-color: #9c9c9c;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #6c757d;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.separe-content{
+    display: flex;
+    flex-direction: row;
+    column-gap: 2rem;
+    height: 100vh;
+
+}
+.maincontent{
+    width: 80%;
+}
+
+.alink{
+    display: block;
+    background-color: #6c757d;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.sidemenue{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    column-gap: 5px;
+    margin-top: 3rem;
+
+}
+
+a {
+    text-decoration: none;
+    color: #1c1c1c;
+}

@@ -9,12 +9,16 @@
 <f:view>
     <head>
         <title>Ma Page JSF</title>
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
     </head>
     <body>
     <ui:include src="header.xhtml" />
-    <ui:include src="menu.xhtml" />
-    <ui:insert name="content" />
+    <div class="separe-content">
+        <ui:include src="menu.xhtml" />
+        <div class="maincontent">
+            <ui:insert name="content" />
+        </div>
+    </div>
     <ui:include src="footer.xhtml" />
     </body>
 </f:view>
