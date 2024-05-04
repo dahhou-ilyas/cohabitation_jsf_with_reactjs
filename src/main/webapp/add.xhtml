@@ -1,21 +1,11 @@
 <ui:composition template="index.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
         <ui:define name="content">
-            <h1>Ajouter un nouvel élément</h1>
-            <h:form>
-                <p:panelGrid columns="2">
-                    <h:outputLabel for="name" value="Nom" />
-                    <p:inputText id="name" value="#{myBean.newElement.name}" />
 
-                    <h:outputLabel for="date" value="Date" />
-                    <p:calendar id="date" value="#{myBean.newElement.date}" showButtonPanel="true" />
+             <h1>Ajouter un nouvel élément</h1>
 
-                    <h:outputLabel for="description" value="Description" />
-                    <p:inputTextarea id="description" value="#{myBean.newElement.description}" rows="5" cols="50" />
-                </p:panelGrid>
 
-                <p:commandButton value="Ajouter" action="#{myBean.addElement}" />
-            </h:form>
+             <div id="add-element"></div>
 
         </ui:define>
     </ui:composition>
