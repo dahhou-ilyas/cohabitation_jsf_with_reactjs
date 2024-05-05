@@ -1,12 +1,12 @@
 package com.example.jsf2;
 
-import java.io.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,31 +15,35 @@ import javax.ws.rs.core.Response;
 public class ElementResource {
 
     @Inject
-    private MyBean myBean;
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)  // Spécifie le type de contenu retourné
-    public String getAllElements() {
-        return "szasa";
-    }
+    private MyBean myBean;  // Injecter le bean JSF
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response addElement(Element element) {
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response addElement(Map<String, String> data) {
+        Element element = new Element();
+        element.setName(data.get("name"));
+        element.setDescription(data.get("description"));
+
+        // Convertir la date de String en Date
         try {
-            // Assurez-vous que le format de date correspond au format attendu
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = sdf.parse(element.getDate().toString());
-
+            Date date = sdf.parse(data.get("date"));
             element.setDate(date);
-            myBean.getElements().add(element);
-
-            return Response.ok("Element added").build();
-        } catch (ParseException e) {
-            // En cas d'erreur de format, retourner un message d'erreur approprié
+        } catch (Exception e) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Invalid date format")
                     .build();
         }
+
+        myBean.addElement(element);  // Ajoutez l'élément au bean
+        System.out.println("Element added: " + element);  // Vérifiez si ceci est imprimé
+
+        return Response.ok("Element added successfully").build();
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)  // Utilisez JSON pour obtenir les éléments
+    public List<Element> getAllElements() {
+        return myBean.getElements();
     }
 }
