@@ -2,15 +2,13 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core">
 
    <ui:define name="content">
       <h1>Liste des Éléments</h1>
 
       <h:form id="mainForm">
-
-         <!-- Tableau des éléments -->
          <p:dataTable id="dataTable" value="#{myBean.elements}" var="element" paginator="true" rows="10">
             <p:column headerText="Nom">
                <h:outputText value="#{element.name}" />
@@ -20,6 +18,10 @@
             </p:column>
             <p:column headerText="Description">
                <h:outputText value="#{element.description}" />
+            </p:column>
+            <p:column headerText="Action">
+               <!-- Lien pour redirection -->
+               <h:commandLink value="Voir Détails" action="#{myBean.redirectToDetailPage(element.id)}" />
             </p:column>
          </p:dataTable>
       </h:form>

@@ -1,0 +1,23 @@
+<ui:composition template="index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+   <ui:define name="content">
+      <h1>Détails de l'Élément</h1>
+
+      <h:form>
+         <!-- Récupérez l'identifiant passé par f:param -->
+         <h:panelGrid columns="2">
+            <h:outputLabel value="Nom:" />
+            <h:outputText value="#{myBean.getElementById(Integer.parseInt(param.elementId)).name}" />
+
+            <h:outputLabel value="Date:" />
+            <h:outputText value="#{myBean.getElementById(Integer.parseInt(param.elementId)).date}" />
+
+            <h:outputLabel value="Description:" />
+            <h:outputText value="#{myBean.getElementById(Integer.parseInt(param.elementId)).description}" />
+         </h:panelGrid>
+      </h:form>
+   </ui:define>
+</ui:composition>
