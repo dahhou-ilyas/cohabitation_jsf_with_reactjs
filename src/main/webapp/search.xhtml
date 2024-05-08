@@ -19,9 +19,15 @@
             <p:column headerText="Description">
                <h:outputText value="#{element.description}" />
             </p:column>
+            <p:column headerText="id">
+               <h:outputText value="#{element.id}" />
+            </p:column>
             <p:column headerText="Action">
                <!-- Lien pour redirection -->
-               <h:commandLink value="Voir Détails" action="#{myBean.redirectToDetailPage(element.id)}" />
+               <h:commandLink action="#{myBean.redirectToDetailPage(element.id)}" outcome="detail">
+                  Voir Détails
+                  <f:param name="elementId" value="#{element.id}" /> <!-- Transmettre l'ID -->
+               </h:commandLink>
             </p:column>
          </p:dataTable>
       </h:form>

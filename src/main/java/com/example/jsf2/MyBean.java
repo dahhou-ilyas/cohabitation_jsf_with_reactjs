@@ -1,6 +1,7 @@
 package com.example.jsf2;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -17,7 +18,7 @@ public class MyBean implements Serializable {
     private List<Element> elements = new ArrayList<>();
     private Element newElement = new Element();
 
-    private String selectedElementId;
+    private int selectedElementId;
 
     public List<Element> getElements() {
         return elements;
@@ -37,28 +38,27 @@ public class MyBean implements Serializable {
     }
 
     public Element getElementById(int id) {
-        Optional<Element> optionalElement = elements.stream()
-                .filter(e -> e.getId() == id) // Comparaison d'entiers
-                .findFirst();
-
-        return optionalElement.orElse(null); // Retournez null si non trouvé
+        return elements.stream()
+                .filter(e -> e.getId() == id) // Filtrer par ID
+                .findFirst() // Obtenir le premier élément correspondant
+                .orElse(null); // Retourner null si non trouvé
     }
+
 
     public void setSelectedElementId(int id) {
-        System.out.println(id);
-        System.out.println("azzazzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
-        this.selectedElementId = String.valueOf(id);
+        this.selectedElementId = id;
     }
 
-    // Obtenir l'identifiant de l'élément sélectionné
-    public String getSelectedElementId() {
+    public int getSelectedElementId() {
         return selectedElementId;
     }
 
     public void redirectToDetailPage(int elementId) {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {
-            ec.redirect("detail.xhtml?elementId=" + elementId); // Redirection avec paramètre
+            this.selectedElementId=elementId;
+            ec.redirect("detail.xhtml?elementId=" + elementId);
+            // Redirection avec paramètre
         } catch (IOException e) {
             e.printStackTrace(); // Traitez les exceptions
         }

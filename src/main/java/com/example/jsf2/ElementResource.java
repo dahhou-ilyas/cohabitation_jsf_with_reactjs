@@ -22,6 +22,8 @@ public class ElementResource {
     @Produces(MediaType.TEXT_PLAIN)
     public Response addElement(Map<String, String> data) {
         Element element = new Element();
+        System.out.println(element.getId());
+        System.out.println("zzzzzzzzzzzzzzzzzz");
         element.setName(data.get("name"));
         element.setDescription(data.get("description"));
 
