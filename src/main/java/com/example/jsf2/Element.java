@@ -23,6 +23,8 @@ public class Element {
         this.description = description;
     }
 
+
+
     private static synchronized int getNextId() {
         return ++idCounter;
     }

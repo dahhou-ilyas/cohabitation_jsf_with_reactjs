@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Named("myBean")
@@ -17,12 +18,11 @@ import java.util.Optional;
 public class MyBean implements Serializable {
     private List<Element> elements = new ArrayList<>();
     private Element newElement = new Element();
+    private String searchQuery = "";
 
     private int selectedElementId;
 
-    public List<Element> getElements() {
-        return elements;
-    }
+
 
     public Element getNewElement() {
         return newElement;
@@ -58,9 +58,30 @@ public class MyBean implements Serializable {
         try {
             this.selectedElementId=elementId;
             ec.redirect("detail.xhtml?elementId=" + elementId);
-            // Redirection avec paramètre
+
         } catch (IOException e) {
-            e.printStackTrace(); // Traitez les exceptions
+            e.printStackTrace();
         }
     }
+
+    public List<Element> getFilteredElements() {
+        return elements.stream()
+                .filter(e -> (e.getName().toLowerCase().contains(searchQuery.toLowerCase()) ||
+                        e.getDescription().toLowerCase().contains(searchQuery.toLowerCase())))
+                .collect(Collectors.toList());
+    }
+
+    public String getSearchQuery() {
+        return searchQuery;
+    }
+
+    public void setSearchQuery(String searchQuery) {
+        this.searchQuery = searchQuery;
+    }
+
+    public List<Element> getElements() {
+        return elements;
+    }
+
+
 }
