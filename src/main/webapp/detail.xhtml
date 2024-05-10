@@ -5,22 +5,6 @@
                 xmlns:f="http://java.sun.com/jsf/core">
 
    <ui:define name="content">
-      <h1>Détails de l'Élément</h1>
-
-      <h:form>
-         <!-- Afficher un message si l'élément n'existe pas -->
-         <h:outputText value="#{myBean.getElementById(myBean.selectedElementId) != null ? '' : 'Élément non trouvé.'}" />
-
-         <h:panelGrid columns="2" rendered="#{myBean.getElementById(myBean.selectedElementId) != null}">
-            <h:outputLabel value="Nom:" />
-            <h:outputText value="#{myBean.getElementById(myBean.selectedElementId).name}" />
-
-            <h:outputLabel value="Date:" />
-            <h:outputText value="#{myBean.getElementById(myBean.selectedElementId).date}" />
-
-            <h:outputLabel value="Description:" />
-            <h:outputText value="#{myBean.getElementById(myBean.selectedElementId).description}" />
-         </h:panelGrid>
-      </h:form>
+      <div id="root"></div>
    </ui:define>
 </ui:composition>

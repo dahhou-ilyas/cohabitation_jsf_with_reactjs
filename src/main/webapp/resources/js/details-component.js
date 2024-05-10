@@ -1,30 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 
 
-
-const DeatilsElements = () => {
-    const [id,setId]=useState('')
-    const [nom,setNom]=useState('');
-    const [description,setDescription]=useState('');
-    const [date,setDate]=useState('');
+function DetailsElement() {
+    const [idd,setIdd]=useState('')
+    const [nomm,setNomm]=useState('');
+    const [desc,setDesc]=useState('');
+    const [dateURL,setDateURL]=useState('');
 
     useEffect(()=>{
         const queryParams = new URLSearchParams(window.location.search);
-        setId(queryParams.get('id'))
-        setNom(queryParams.get('name'))
-        setDescription(queryParams.get('description'))
-        setDate(queryParams.get('date'))
+        setIdd(queryParams.get('id'))
+        setNomm(queryParams.get('name'))
+        setDesc(queryParams.get('description'))
+        setDateURL(queryParams.get('date'))
     },[])
 
     return (
         <div>
             <h1>Détails de l'Élément</h1>
-            <p className='totalName'><span className='kle'>id:</span> <span className='contentDetals'>{id}</span></p>
-            <p className='totalName'><span className='kle'>Nom:</span> <span className='contentDetals'>{nom}</span></p>
-            <p className='totalName'><span className='kle'>Description:</span> <span className='contentDetals'>{description}</span></p>
-            <p className='totalName'><span className='kle'>Description:</span> <span className='contentDetals'>{date}</span></p>
+            <p className='totalName'><span className='kle'>id:</span> <span className='contentDetals'>{idd}</span></p>
+            <p className='totalName'><span className='kle'>Nom:</span> <span className='contentDetals'>{nomm}</span></p>
+            <p className='totalName'><span className='kle'>Description:</span> <span className='contentDetals'>{desc}</span></p>
+            <p className='totalName'><span className='kle'>Description:</span> <span className='contentDetals'>{dateURL}</span></p>
         </div>
     );
-};
+}
 
-export default DeatilsElements;
+export default DetailsElement

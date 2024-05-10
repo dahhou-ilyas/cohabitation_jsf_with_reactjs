@@ -8,6 +8,7 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,10 +18,15 @@ import java.util.stream.Collectors;
 @SessionScoped
 public class MyBean implements Serializable {
     private List<Element> elements = new ArrayList<>();
+
+
+
+
+
     private Element newElement = new Element();
     private String searchQuery = "";
 
-    private int selectedElementId;
+    private Element selectedElement;
 
 
 
@@ -45,19 +51,19 @@ public class MyBean implements Serializable {
     }
 
 
-    public void setSelectedElementId(int id) {
-        this.selectedElementId = id;
+    public void setSelectedElementId(Element element) {
+        this.selectedElement = element;
     }
 
-    public int getSelectedElementId() {
-        return selectedElementId;
+    public Element getSelectedElementId() {
+        return selectedElement;
     }
 
-    public void redirectToDetailPage(int elementId) {
+    public void redirectToDetailPage(Element element) {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         try {
-            this.selectedElementId=elementId;
-            ec.redirect("detail.xhtml?elementId=" + elementId);
+            this.selectedElement=element;
+            ec.redirect("detail.xhtml?id=" + element.getId()+"&name="+element.getName()+"&description="+element.getDescription()+"&date="+element.getDate());
 
         } catch (IOException e) {
             e.printStackTrace();
