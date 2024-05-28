@@ -2,6 +2,7 @@ package com.example.jsf2;
 
 import com.google.gson.Gson;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.ExternalContext;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.primefaces.PrimeFaces;
 
 @Named("myBean")
 @SessionScoped
@@ -25,16 +27,10 @@ public class MyBean implements Serializable {
 
 
 
-    private Element newElement = new Element();
     private String searchQuery = "";
 
     private Element selectedElement;
 
-
-
-    public Element getNewElement() {
-        return newElement;
-    }
 
     public void addElement(Element element) {  // Accepter un élément en paramètre
         elements.add(element);  // Ajouter l'élément à la liste
@@ -53,13 +49,6 @@ public class MyBean implements Serializable {
     }
 
 
-    public void setSelectedElementId(Element element) {
-        this.selectedElement = element;
-    }
-
-    public Element getSelectedElementId() {
-        return selectedElement;
-    }
 
     public void redirectToDetailPage(Element element) {
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -100,5 +89,19 @@ public class MyBean implements Serializable {
         System.out.println("Added element from React: " + element);
         System.out.println("ssssssssssiiiiiizr   "+elements.size());
     }
+
+
+    // Méthode pour obtenir les éléments sous forme de JSON
+    public void getElementsAsJson() {
+
+        Gson gson = new Gson();
+        PrimeFaces.current().ajax().addCallbackParam("elements", gson.toJson(elements));
+    }
+
+    public void dragon() {
+        String dragonValue = "saisjaosijas"; // La valeur à retourner
+        PrimeFaces.current().ajax().addCallbackParam("dragonValue", dragonValue);
+    }
+
 
 }

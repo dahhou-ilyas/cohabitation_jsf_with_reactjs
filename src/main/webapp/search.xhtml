@@ -9,27 +9,29 @@
       <h1>Liste des Éléments</h1>
 
       <h:form id="mainForm">
+         <p:inputText id="searchQuery" value="#{myBean.searchQuery}" placeholder="Rechercher..." />
+         <p:commandButton id="searchButton" value="Chercher" action="#{myBean.refreshIframe}" style="display:none;" process="@this" />
 
-         <p:inputText value="#{myBean.searchQuery}" placeholder="Rechercher..." />
-         <p:commandButton value="Chercher" update="dataTable" />
-
-         <p:dataTable id="dataTable" value="#{myBean.getFilteredElements()}" var="element" paginator="true" rows="10">
-            <p:column headerText="Nom">
-               <h:outputText value="#{element.name}" />
-            </p:column>
-            <p:column headerText="Date">
-               <h:outputText value="#{element.date}" />
-            </p:column>
-            <p:column headerText="Description">
-               <h:outputText value="#{element.description}" />
-            </p:column>
-            <p:column headerText="Action">
-               <h:commandLink action="#{myBean.redirectToDetailPage(element)}" outcome="detail">
-                  Voir Détails
-                  <f:param name="elementId" value="#{element.id}" />
-               </h:commandLink>
-            </p:column>
-         </p:dataTable>
+         <p:remoteCommand name="callElements" action="#{myBean.getElementsAsJson}" process="@this"  oncomplete="handleCallElements(xhr, status, args)"/>
       </h:form>
+
+      <!-- Ajout de l'iframe pour afficher les éléments ajoutés -->
+      <iframe id="reactIframeSearch" src="http://localhost:3000/search-only" width="100%" height="600px" frameborder="0" style="margin-top: 20px;"></iframe>
+
+      <script type="text/javascript">
+
+         window.onload= function() {
+            callElements();
+         };
+         function handleCallElements(xhr, status, args) {
+
+            let elements = args.elements;
+
+            console.log(elements);
+            let iframe = document.getElementById('reactIframeSearch');
+            iframe.contentWindow.postMessage(elements, '*');
+         }
+
+      </script>
    </ui:define>
 </ui:composition>
