@@ -1,5 +1,7 @@
 package com.example.jsf2;
 
+import com.google.gson.Gson;
+
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.ExternalContext;
@@ -89,5 +91,14 @@ public class MyBean implements Serializable {
         return elements;
     }
 
+
+    public void addElementFromReact() {
+        String jsonElement = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("newElement");
+        Gson gson = new Gson();
+        Element element = gson.fromJson(jsonElement, Element.class);
+        elements.add(element);
+        System.out.println("Added element from React: " + element);
+        System.out.println("ssssssssssiiiiiizr   "+elements.size());
+    }
 
 }
