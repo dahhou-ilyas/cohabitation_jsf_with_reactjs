@@ -27,7 +27,7 @@ public class MyBean implements Serializable {
 
 
 
-    private String searchQuery = "";
+    private String searchQuery ="";
 
     private Element selectedElement;
 
@@ -97,6 +97,23 @@ public class MyBean implements Serializable {
         Gson gson = new Gson();
         PrimeFaces.current().ajax().addCallbackParam("elements", gson.toJson(elements));
     }
+
+    public void filterElements() {
+        // Filtrer les éléments en fonction de la requête de recherche
+        List<Element> filteredElements = elements.stream()
+                .filter(e -> e.getName().toLowerCase().contains(searchQuery.toLowerCase()) ||
+                        e.getDescription().toLowerCase().contains(searchQuery.toLowerCase()))
+                .collect(Collectors.toList());
+
+        // Envoyer les éléments filtrés au composant React
+        Gson gson = new Gson();
+        String jsonFilteredElements = gson.toJson(filteredElements);
+        System.out.println(jsonFilteredElements);
+        // Exécuter le script JavaScript pour appeler la fonction handleFilterResult
+        PrimeFaces.current().executeScript("handleFilterResult(" + jsonFilteredElements + ")");
+    }
+
+
 
     public void dragon() {
         String dragonValue = "saisjaosijas"; // La valeur à retourner
