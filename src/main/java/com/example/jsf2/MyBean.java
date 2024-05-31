@@ -3,6 +3,7 @@ package com.example.jsf2;
 import com.google.gson.Gson;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.ExternalContext;
@@ -19,8 +20,8 @@ import java.util.stream.Collectors;
 import org.primefaces.PrimeFaces;
 
 @Named("myBean")
-@SessionScoped
-public class MyBean implements Serializable {
+@ApplicationScoped
+public class MyBean {
     private List<Element> elements = new ArrayList<>();
 
 
@@ -88,6 +89,12 @@ public class MyBean implements Serializable {
         elements.add(element);
         System.out.println("Added element from React: " + element);
         System.out.println("ssssssssssiiiiiizr   "+elements.size());
+
+        try {
+            WebSocketEndpoint.broadcast(jsonElement);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
