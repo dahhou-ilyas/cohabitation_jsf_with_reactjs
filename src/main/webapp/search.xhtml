@@ -12,7 +12,6 @@
          <p:inputText id="searchQuery" value="#{myBean.searchQuery}" placeholder="Rechercher..." />
          <p:commandButton id="searchButton" value="Chercher" action="#{myBean.filterElements}" />
 
-         <p:remoteCommand name="callElements" action="#{myBean.getElementsAsJson}" process="@this"  oncomplete="handleCallElements(xhr, status, args)"/>
       </h:form>
 
       <!-- Ajout de l'iframe pour afficher les éléments ajoutés -->
@@ -20,6 +19,7 @@
 
       <script type="text/javascript">
 
+         /*
          window.onload= function() {
             callElements();
          };
@@ -31,9 +31,11 @@
             iframe.contentWindow.postMessage(elements, '*');
          }
 
-         function handleFilterResult(jsonFilteredElements) {
+          */
+
+         function handleFilterResult(searchQuery) {
             let iframe = document.getElementById('reactIframeSearch');
-            iframe.contentWindow.postMessage(jsonFilteredElements, '*');
+            iframe.contentWindow.postMessage(searchQuery, '*');
          }
 
       </script>

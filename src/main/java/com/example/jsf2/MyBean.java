@@ -106,6 +106,7 @@ public class MyBean {
     }
 
     public void filterElements() {
+        /*
         // Filtrer les éléments en fonction de la requête de recherche
         List<Element> filteredElements = elements.stream()
                 .filter(e -> e.getName().toLowerCase().contains(searchQuery.toLowerCase()) ||
@@ -116,8 +117,11 @@ public class MyBean {
         Gson gson = new Gson();
         String jsonFilteredElements = gson.toJson(filteredElements);
         System.out.println(jsonFilteredElements);
+
+         */
+        String SearchQuery=searchQuery;
         // Exécuter le script JavaScript pour appeler la fonction handleFilterResult
-        PrimeFaces.current().executeScript("handleFilterResult(" + jsonFilteredElements + ")");
+        PrimeFaces.current().executeScript("handleFilterResult('" + SearchQuery + "')");
     }
 
 
