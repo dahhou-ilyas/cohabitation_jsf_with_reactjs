@@ -2,19 +2,13 @@ package com.example.jsf2;
 
 import com.google.gson.Gson;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.ManagedProperty;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.primefaces.PrimeFaces;
@@ -87,9 +81,6 @@ public class MyBean {
         Gson gson = new Gson();
         Element element = gson.fromJson(jsonElement, Element.class);
         elements.add(element);
-        System.out.println("Added element from React: " + element);
-        System.out.println("ssssssssssiiiiiizr   "+elements.size());
-
         try {
             WebSocketEndpoint.broadcast(jsonElement);
         } catch (IOException e) {
@@ -100,7 +91,6 @@ public class MyBean {
 
     // Méthode pour obtenir les éléments sous forme de JSON
     public void getElementsAsJson() {
-
         Gson gson = new Gson();
         PrimeFaces.current().ajax().addCallbackParam("elements", gson.toJson(elements));
     }
