@@ -53,9 +53,11 @@ public class WebSocketEndpoint {
 
         Gson gson = new Gson();
         Element newElement = gson.fromJson(message, Element.class);
-        System.out.println("my element ilyas dahhou + "+newElement);
         // Ajouter l'élément à la liste dans MyBean
         myBean.addElement(newElement);
+
+        WebSocketEndpoint.broadcast("refreshPage");
+
         synchronized (clients) {
             for (Session client : clients) {
                 if (!client.equals(session)) {
@@ -63,6 +65,7 @@ public class WebSocketEndpoint {
                 }
             }
         }
+
     }
 
     public static void broadcast(String message) throws IOException {

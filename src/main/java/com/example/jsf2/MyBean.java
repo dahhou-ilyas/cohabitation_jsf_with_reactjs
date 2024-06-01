@@ -3,6 +3,10 @@ package com.example.jsf2;
 import com.google.gson.Gson;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIViewRoot;
+import javax.faces.component.visit.VisitContext;
+import javax.faces.component.visit.VisitContextFactory;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -114,6 +118,16 @@ public class MyBean {
         PrimeFaces.current().executeScript("handleFilterResult('" + SearchQuery + "')");
     }
 
+    public void refrechHeader() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        System.out.println("my context is ====> " +context);
+        if (context != null) {
+            UIViewRoot viewRoot = context.getViewRoot();
+            String clientId = viewRoot.findComponent("formId:headerCount").getClientId(context);
+            System.out.println("my client ID is ====> "+clientId);
+            context.getPartialViewContext().getRenderIds().add(clientId);
+        }
+    }
 
 
     public void dragon() {

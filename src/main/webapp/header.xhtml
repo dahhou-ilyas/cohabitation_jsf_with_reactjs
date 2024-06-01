@@ -13,4 +13,15 @@
         </p:toolbarGroup>
     </p:toolbar>
 
+    <script>
+        let socket = new WebSocket("ws://localhost:8080/jsf2-1.0-SNAPSHOT/websocket");
+        socket.onmessage = function(event) {
+            console.log(event.data)
+            if (event.data === "refreshPage") {
+                // Rafraîchir la page
+                window.location.reload(true); // Le paramètre true force le rechargement à partir du serveur et non du cache
+            }
+        };
+    </script>
+
 </ui:composition>
