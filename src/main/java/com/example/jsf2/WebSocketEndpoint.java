@@ -50,9 +50,10 @@ public class WebSocketEndpoint {
 
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
+
         Gson gson = new Gson();
         Element newElement = gson.fromJson(message, Element.class);
-
+        System.out.println("my element ilyas dahhou + "+newElement);
         // Ajouter l'élément à la liste dans MyBean
         myBean.addElement(newElement);
         synchronized (clients) {
